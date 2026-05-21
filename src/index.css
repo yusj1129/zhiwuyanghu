@@ -1,0 +1,458 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /*
+     * 浅色 · 旅行/植物养护（严格色板）
+     * 深松绿 #3E8257 | 浅松绿 #4E8F38 | 暖柠黄 #FFC64A
+     * 纯黑 #000000 | 浅灰 #D9D9D9
+     */
+    --background: 0 0% 85%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 90%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 90%;
+    --popover-foreground: 0 0% 0%;
+    /* 深松绿 · 主按钮 / 主强调 / 选中 */
+    --primary: 140 35% 38%;
+    --primary-foreground: 0 0% 100%;
+    /* 浅松绿 · 次要强调 / 图标 / 分割 */
+    --secondary: 105 44% 39%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 80%;
+    --muted-foreground: 0 0% 32%;
+    /* 暖柠黄 · 警告 / 标签 / 交互点缀 */
+    --accent: 42 100% 65%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 105 22% 72%;
+    --input: 0 0% 88%;
+    --ring: 140 35% 38%;
+    /* 更大圆角 · 统一面板/按钮/输入框 */
+    --radius: 1.5rem;
+    /* 柔和阴影（深松绿基调） */
+    --shadow-soft: 0 8px 32px rgba(62, 130, 87, 0.12);
+    --shadow-card: 0 12px 40px rgba(62, 130, 87, 0.1);
+    --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+
+    /* shadcn Sidebar（与浅色面板一致） */
+    --sidebar-background: 0 0% 85%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 140 35% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 42 100% 94%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 105 22% 72%;
+    --sidebar-ring: 140 35% 38%;
+
+    /* 与色板对齐的直用 hex */
+    --plant-pine-deep: #3e8257;
+    --plant-pine-light: #4e8f38;
+    --plant-lemon: #ffc64a;
+    --plant-black: #000000;
+    --plant-gray: #d9d9d9;
+    --plant-mint: #d9d9d9;
+    --plant-apricot: #ffc64a;
+    --plant-beige: #e8e8e8;
+    --plant-forest: #3e8257;
+    --plant-primary: #3e8257;
+    --plant-primary-light: #4e8f38;
+    --plant-soil: #b0b0b0;
+    --plant-water: rgba(78, 143, 56, 0.12);
+    --plant-warning: #ffc64a;
+    --plant-bg: #d9d9d9;
+    --plant-card: #e8e8e8;
+    --plant-text: #000000;
+    --plant-text-secondary: #4e8f38;
+    --plant-text-hint: rgba(0, 0, 0, 0.45);
+    --plant-border: rgba(78, 143, 56, 0.35);
+    --plant-title: #000000;
+    --plant-search-highlight: rgba(255, 198, 74, 0.4);
+    --plant-chip-inactive-bg: rgba(78, 143, 56, 0.1);
+  }
+
+  .dark {
+    color-scheme: dark;
+    /* 深色 · 黑绿撞色（严格色板） */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 109 48% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 84 100% 65%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 7%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 84 100% 65%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 100% 66%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 63%;
+    --input: 0 0% 7%;
+    --ring: 84 100% 65%;
+    /* 深色下保持扁平：尽量取消阴影 */
+    --shadow-soft: 0 0 0 rgba(0, 0, 0, 0);
+    --shadow-card: 0 0 0 rgba(0, 0, 0, 0);
+    --shadow-inset: inset 0 1px 0 rgba(160, 160, 160, 0.1);
+
+    /* shadcn Sidebar 深色变量 */
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 109 48% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 84 100% 65%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 63%;
+    --sidebar-ring: 84 100% 65%;
+
+    /* 深色模式自定义变量 */
+    --plant-bg: #000000;
+    --plant-card: #121212;
+    --plant-text: #ffffff;
+    --plant-text-secondary: #a0a0a0;
+    --plant-border: #a0a0a0;
+    --plant-title: #ffffff;
+    --plant-text-hint: #a0a0a0;
+    --plant-water: rgba(184, 255, 74, 0.14);
+    --plant-search-highlight: rgba(184, 255, 74, 0.2);
+    --plant-chip-inactive-bg: #121212;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Roboto", "Segoe UI", sans-serif;
+  }
+}
+
+@layer components {
+  /* 卡片样式 */
+  .plant-card {
+    @apply bg-card text-card-foreground rounded-3xl border border-border/60 dark:border-border shadow-plant-card dark:shadow-none;
+  }
+  
+  /* 主按钮 */
+  .plant-btn-primary {
+    @apply bg-primary text-primary-foreground rounded-2xl h-[48px] font-medium transition-all duration-200 border border-primary/20 shadow-plant dark:shadow-none;
+  }
+  .plant-btn-primary:active {
+    @apply scale-[0.98] brightness-95;
+  }
+  
+  /* 次按钮（浅松绿描边） */
+  .plant-btn-secondary {
+    @apply bg-card/95 border-2 border-secondary/50 text-foreground rounded-2xl h-[48px] font-medium transition-all duration-200 hover:border-secondary/70 hover:bg-muted/50;
+  }
+  .plant-btn-secondary:active {
+    @apply scale-[0.98];
+  }
+  
+  /* 功能图标按钮 */
+  .plant-icon-btn {
+    @apply w-[44px] h-[44px] flex items-center justify-center rounded-full transition-all duration-200;
+  }
+  .plant-icon-btn:active {
+    @apply scale-110;
+  }
+  
+  /* 标签样式 */
+  .plant-tag {
+    @apply px-3 py-1 rounded-full text-[12px] font-normal;
+  }
+  .plant-tag-primary {
+    @apply bg-primary text-primary-foreground;
+  }
+  .plant-tag-light {
+    @apply bg-[var(--plant-water)] text-foreground dark:text-[#81C784];
+  }
+  .plant-tag-success {
+    @apply bg-secondary text-secondary-foreground;
+  }
+  
+  /* 输入框 */
+  .plant-input {
+    box-shadow: var(--shadow-inset), var(--shadow-soft);
+    @apply rounded-2xl border border-border bg-card px-4 py-3 text-[16px] text-foreground transition-all duration-200 outline-none;
+  }
+  .plant-input:focus {
+    @apply border-primary ring-2 ring-primary/30;
+  }
+  .plant-input.error {
+    @apply border-[#FF5252];
+  }
+  
+  /* 导航栏 */
+  .plant-nav-top {
+    @apply fixed top-0 left-0 right-0 h-[48px] bg-card/95 backdrop-blur-sm border-b border-border z-50 px-4 flex items-center justify-between;
+  }
+  
+  .plant-nav-bottom {
+    @apply fixed bottom-0 left-0 right-0 h-[56px] bg-card border-t border-border shadow-[0_-2px_8px_rgba(0,0,0,0.05)] dark:shadow-none z-50 flex items-center justify-around;
+  }
+  
+  /* 页面容器 */
+  .plant-page {
+    @apply min-h-screen bg-background text-foreground pt-[48px] pb-[72px] px-4;
+  }
+  
+  /* 模块标题 */
+  .plant-section-title {
+    @apply text-[18px] font-medium text-foreground mb-3;
+  }
+  
+  /* 列表项 */
+  .plant-list-item {
+    @apply flex items-center py-4 px-4 bg-card transition-colors duration-200;
+  }
+  .plant-list-item:active {
+    @apply bg-accent;
+  }
+  
+  /* 分割线 */
+  .plant-divider {
+    @apply h-[1px] bg-border mx-4;
+  }
+}
+
+@layer utilities {
+  /* 隐藏滚动条 */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* 文本省略 */
+  .text-ellipsis-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .text-ellipsis-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* 安全区域 */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+  }
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  /* 全站语义色快捷类（与 shadcn 变量一致，便于替换硬编码 hex） */
+  .bg-app {
+    @apply bg-background;
+  }
+  .bg-app-card {
+    @apply bg-card;
+  }
+  .text-app {
+    @apply text-foreground;
+  }
+  .text-app-muted {
+    @apply text-muted-foreground;
+  }
+  .border-app {
+    @apply border-border;
+  }
+}
+
+/* 动画关键帧 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from { 
+    transform: translateX(100%);
+  }
+  to { 
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from { 
+    transform: translateX(0);
+  }
+  to { 
+    transform: translateX(-30%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    transform: translateY(100%);
+  }
+  to { 
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from { 
+    transform: translateY(0);
+  }
+  to { 
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes scaleIn {
+  from { 
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  75% { transform: rotate(-2deg); }
+}
+
+/* 动画类 */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slideOutRight {
+  animation: slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.2s ease-out forwards;
+}
+
+.animate-spin-plant {
+  animation: spin 1s linear infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce-soft {
+  animation: bounce 0.3s ease-out;
+}
+
+.animate-heart-pop {
+  animation: heartPop 0.3s ease-out;
+}
+
+.animate-float {
+  animation: float 2s ease-in-out infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+/* 延迟动画 */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+/* 页面过渡 */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.3s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.page-transition-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateX(-30%);
+  transition: opacity 0.3s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
