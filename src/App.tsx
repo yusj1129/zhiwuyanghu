@@ -67,7 +67,7 @@ function App() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       setSession(session);
-      if (event === 'SIGNED_IN' && session?.user) {
+      if (event === 'SIGNED_IN' && 0-ession?.user) {
         await syncProfile(session.user);
       }
     });

@@ -56,7 +56,7 @@ export const RegisterPage = () => {
         return;
       }
 
-      trackEvent('auth_register_ok');
+      //trackEvent('auth_register_ok');
 
       if (data.session) {
         toast.success('注册成功，已自动登录');
