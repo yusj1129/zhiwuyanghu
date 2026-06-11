@@ -10,8 +10,8 @@ import { CommunityPage } from '@/sections/CommunityPage';
 import { ProfilePage } from '@/sections/ProfilePage';
 import { LoginPage } from '@/sections/Auth/LoginPage';
 import { RegisterPage } from '@/sections/Auth/RegisterPage';
-import { AuthCallbackPage } from './sections/Auth/AuthCallbackPage';
-import { ResetPasswordPage } from './sections/Auth/ResetPasswordPage';
+import { AuthCallbackPage } from '@/sections/Auth/AuthCallbackPage';
+import { ResetPasswordPage } from '@/sections/Auth/ResetPasswordPage';
 import { RequireAuth } from '@/components/RequireAuth';
 import { FavoritesPage } from '@/sections/FavoritesPage';
 import { CareRemindersPage } from '@/sections/CareRemindersPage';
@@ -67,7 +67,7 @@ function App() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       setSession(session);
-      if (event === 'SIGNED_IN' && 0-ession?.user) {
+      if (event === 'SIGNED_IN' && session?.user) {
         await syncProfile(session.user);
       }
     });

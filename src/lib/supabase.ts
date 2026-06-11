@@ -23,10 +23,31 @@ function scrubBrokenSupabaseAuthPersistence(url: string): void {
     const key = `sb-${projectRef}-auth-token`;
     const raw = window.localStorage.getItem(key);
     if (!raw) return;
-    const parsed = JSON.parse(raw) as { refresh_token?: string };
+    
+    // 检查是否包含非 ISO-8859-1 字符
+    let hasNonIsoChar = false;
+    for (let i = 0; i < raw.length; i++) {
+      if (raw.charCodeAt(i) > 255) {
+        hasNonIsoChar = true;
+        break;
+      }
+    }
+    
+    let parsed: any = null;
+    let isInvalidJson = false;
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      isInvalidJson = true;
+    }
+    
     const rt = parsed?.refresh_token;
-    if (typeof rt !== 'string' || rt.length < 8) {
+    const isRefreshTokenInvalid = typeof rt !== 'string' || rt.length < 8;
+    
+    // 如果有问题，清理掉
+    if (hasNonIsoChar || isInvalidJson || isRefreshTokenInvalid) {
       window.localStorage.removeItem(key);
+      console.warn('[Supabase] 清理了损坏的 Auth Token');
     }
   } catch {
     try {
@@ -40,6 +61,40 @@ function scrubBrokenSupabaseAuthPersistence(url: string): void {
     }
   }
 }
+
+/** 在 SDK 初始化前拦截 Headers 方法，防止非 ISO-8859-1 错误 */
+(function patchHeadersBeforeCreateClient() {
+  if (typeof window === 'undefined' || typeof Headers === 'undefined') return;
+  
+  const originalSet = Headers.prototype.set;
+  const originalAppend = Headers.prototype.append;
+  
+  function sanitize(value: string): string {
+    let result = '';
+    for (let i = 0; i < value.length; i++) {
+      if (value.charCodeAt(i) <= 255) {
+        result += value.charAt(i);
+      }
+    }
+    return result;
+  }
+  
+  Headers.prototype.set = function(name: string, value: string): void {
+    try {
+      originalSet.call(this, name, sanitize(value));
+    } catch {
+      console.warn('[Headers] 安全处理了 header');
+    }
+  };
+  
+  Headers.prototype.append = function(name: string, value: string): void {
+    try {
+      originalAppend.call(this, name, sanitize(value));
+    } catch {
+      console.warn('[Headers] 安全处理了 header');
+    }
+  };
+})();
 
 scrubBrokenSupabaseAuthPersistence(supabaseUrl);
 
