@@ -585,7 +585,7 @@ export function PlantDetailPage() {
           <div className="bg-card rounded-[24px] shadow-sm overflow-hidden min-h-[320px]">
             <Tabs defaultValue="care" className="w-full">
               <div className="px-6 pt-4">
-                <div className="flex bg-background p-1 rounded-xl">
+                <TabsList className="w-full bg-background p-1 rounded-xl">
                   <TabsTrigger
                     value="care"
                     className="flex-1 rounded-lg py-2 text-[14px] data-[state=active]:bg-card data-[state=active]:shadow-sm"
@@ -598,7 +598,7 @@ export function PlantDetailPage() {
                   >
                     成长日志
                   </TabsTrigger>
-                </div>
+                </TabsList>
               </div>
 
               <TabsContent value="care" className="p-6 space-y-6">
